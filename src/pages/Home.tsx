@@ -216,18 +216,29 @@ const Home: React.FC = () => {
             )}
             <div className="bg-white shadow-md rounded-lg p-6">
                 <h3 className="text-xl font-semibold mb-4">Log Data</h3>
-                <ul className="space-y-2">
-                    {logData.length > 0 ? (
-                        logData.map((log, index) => (
-                            <li key={index} className="p-2 bg-gray-100 rounded-md text-sm">
-                                {log.logs} - <span className="text-gray-500">{log.createdAt}</span>
-                            </li>
-                        ))
-                    ) : (
-                        <p className="text-gray-500">No logs available</p>
-                    )}
-                </ul>
+                {logData.length > 0 ? (
+                    Object.entries(
+                        logData.reduce((acc, log) => {
+                            (acc[log.service_id] = acc[log.service_id] || []).push(log);
+                            return acc;
+                        }, {} as Record<string, typeof logData>)
+                    ).map(([serviceId, logs]) => (
+                        <div key={serviceId} className="mb-4">
+                            <h4 className="text-lg font-medium text-gray-700">Service ID: {serviceId}</h4>
+                            <ul className="space-y-2 mt-2">
+                                {logs.map((log, index) => (
+                                    <li key={index} className="p-2 bg-gray-100 rounded-md text-sm">
+                                        {log.logs} - <span className="text-gray-500">{log.createdAt}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-500">No logs available</p>
+                )}
             </div>
+
         </div>
 
     );
