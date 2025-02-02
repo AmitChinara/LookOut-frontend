@@ -225,7 +225,7 @@ const Home: React.FC = () => {
                             return (
                                 <li key={serviceId} className="mb-4">
                                     <h4 className="text-lg font-semibold text-gray-700">
-                                        Service Name: {service ? service.name : "Unknown Service"}
+                                        Service Name: {service ? service.name : serviceId}
                                     </h4>
                                     <ul className="mt-2 space-y-2">
                                         {logData
