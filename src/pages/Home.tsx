@@ -33,11 +33,13 @@ const Home: React.FC = () => {
                         message._id === response.id ? { ...message, status: response.newStatus } : message
                     )
                 );
+                setLogData(prevlog => [...prevlog, response.data.logData]);
             } else if (response?.event === "SERVICE_CREATED") {
                 setMessages(prevMessages => [...prevMessages, response.data.statusData]);
-                setLogData(prevMessages => [...prevMessages, response.data.logData]);
+                setLogData(prevlog => [...prevlog, response.data.logData]);
             } else if (response?.event === "SERVICE_DELETED") {
                 setMessages(prevMessages => prevMessages.filter(message => message._id !== response.id));
+                setLogData(prevlog => [...prevlog, response.data.logData]);
             }
         };
 
