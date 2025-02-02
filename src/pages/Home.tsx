@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 
-const WS_URL = "wss://lookout-backend.onrender.com/api/v1/status/getStatus";
-const API_BASE_URL = "https://lookout-backend.onrender.com/api/v1/status";
+const WS_URL = "wss://lookout-backend-6msy.onrender.com/api/v1/status/getStatus";
+const API_BASE_URL = "https://lookout-backend-6msy.onrender.com/api/v1/status";
 
 const Home: React.FC = () => {
     const [messages, setMessages] = useState<any[]>([]);
