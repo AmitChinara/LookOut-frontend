@@ -220,23 +220,28 @@ const Home: React.FC = () => {
                 <h3 className="text-xl font-semibold mb-4">Log Data</h3>
                 <ul className="space-y-4">
                     {uniqueServiceIds.length > 0 ? (
-                        uniqueServiceIds.map(serviceId => (
-                            <li key={serviceId} className="mb-4">
-                                <h4 className="text-lg font-semibold text-gray-700">Service Name: {messages.find(msg => msg._id === serviceId)?.name || `${JSON.stringify(messages)}`}</h4>
-                                <ul className="mt-2 space-y-2">
-                                    {logData
-                                        .filter(log => log.serviceId === serviceId)
-                                        .map(log => (
-                                            <li key={log._id} className="p-2 bg-gray-100 rounded-md shadow-sm">
-                                                <p className="text-gray-700 font-medium">{log.logs}</p>
-                                                <p className="text-gray-500 text-sm">
-                                                    Created at: {new Date(log.createdAt).toLocaleString()}
-                                                </p>
-                                            </li>
-                                        ))}
-                                </ul>
-                            </li>
-                        ))
+                        uniqueServiceIds.map(serviceId => {
+                            const service = messages.find(msg => msg._id === serviceId);
+                            return (
+                                <li key={serviceId} className="mb-4">
+                                    <h4 className="text-lg font-semibold text-gray-700">
+                                        Service Name: {service ? service.name : "Unknown Service"}
+                                    </h4>
+                                    <ul className="mt-2 space-y-2">
+                                        {logData
+                                            .filter(log => log.serviceId === serviceId)
+                                            .map(log => (
+                                                <li key={log._id} className="p-2 bg-gray-100 rounded-md shadow-sm">
+                                                    <p className="text-gray-700 font-medium">{log.logs}</p>
+                                                    <p className="text-gray-500 text-sm">
+                                                        Created at: {new Date(log.createdAt).toLocaleString()}
+                                                    </p>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </li>
+                            );
+                        })
                     ) : (
                         <p className="text-gray-500">No logs available</p>
                     )}
