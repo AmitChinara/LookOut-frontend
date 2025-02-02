@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 
-const WS_URL = "wss://lookout-backend-6msy.onrender.com/api/v1/status/getStatus";
-const API_BASE_URL = "https://lookout-backend-6msy.onrender.com/api/v1/status";
+const WS_URL = "ws://localhost:2722/api/v1/status/getStatus";
+const API_BASE_URL = "http://localhost:2722/api/v1/status";
 
 const Home: React.FC = () => {
     const [messages, setMessages] = useState<any[]>([]);
@@ -35,7 +35,7 @@ const Home: React.FC = () => {
                 );
                 setLogData(prevlog => [...prevlog, response.logs]);
             } else if (response?.event === "SERVICE_CREATED") {
-                setMessages(prevMessages => [...prevMessages, response.data.statusData]);
+                setMessages(prevMessages => [...prevMessages, response.data]);
                 setLogData(prevlog => [...prevlog, response.logs]);
             } else if (response?.event === "SERVICE_DELETED") {
                 setMessages(prevMessages => prevMessages.filter(message => message._id !== response.id));
@@ -172,7 +172,6 @@ const Home: React.FC = () => {
                     <thead>
                     <tr className="bg-gray-100 border-b">
                         <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">Select</th>
-                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">ID</th>
                         <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">Name</th>
                         <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">Status</th>
                     </tr>
@@ -187,8 +186,7 @@ const Home: React.FC = () => {
                                     onChange={() => setSelectedId(msg._id)}
                                 />
                             </td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{msg._id}</td>
-                            <td className="py-3 px-4 text-sm text-gray-700">{msg.name}</td>
+                            <td className="py-3 px-4 text-sm text-gray-700">msg.name</td>
                             <td className="py-3 px-4 text-sm text-gray-700">
                                 <select
                                     value={msg.status}
@@ -234,7 +232,7 @@ const Home: React.FC = () => {
                                         {logData
                                             .filter(log => log.serviceId === serviceId)
                                             .map(log => (
-                                                <li key={log.id} className="p-2 bg-gray-100 rounded-md shadow-sm">
+                                                <li key={log._id} className="p-2 bg-gray-100 rounded-md shadow-sm">
                                                     <p className="text-gray-700 font-medium">{log.logs}</p>
                                                     <p className="text-gray-500 text-sm">
                                                         Created at: {new Date(log.createdAt).toLocaleString()}
