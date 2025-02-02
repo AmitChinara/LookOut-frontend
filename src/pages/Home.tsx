@@ -186,7 +186,7 @@ const Home: React.FC = () => {
                                     onChange={() => setSelectedId(msg._id)}
                                 />
                             </td>
-                            <td className="py-3 px-4 text-sm text-gray-700">msg.name</td>
+                            <td className="py-3 px-4 text-sm text-gray-700">{msg.name}</td>
                             <td className="py-3 px-4 text-sm text-gray-700">
                                 <select
                                     value={msg.status}
