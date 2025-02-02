@@ -15,11 +15,9 @@ export default function App() {
                     <h1 className="text-2xl font-semibold text-gray-800">Lookout</h1>
                     <div className="space-x-4">
                         <SignedOut>
+                            {/* Use SignInButton directly */}
                             <SignInButton mode="modal">
-                                {/* Render the SignInButton directly */}
-                                <button className="text-blue-500 hover:text-blue-700">
-                                    Sign In
-                                </button>
+                                Sign In
                             </SignInButton>
                         </SignedOut>
                         <SignedIn>
