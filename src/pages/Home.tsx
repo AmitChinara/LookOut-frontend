@@ -220,7 +220,7 @@ const Home: React.FC = () => {
                     {logData.length > 0 ? (
                         logData.map((log, index) => (
                             <li key={index} className="p-2 bg-gray-100 rounded-md text-sm">
-                                {log.message} - <span className="text-gray-500">{log.timestamp}</span>
+                                {log.logs} - <span className="text-gray-500">{log.createdAt}</span>
                             </li>
                         ))
                     ) : (
