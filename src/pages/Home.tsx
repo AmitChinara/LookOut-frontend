@@ -234,7 +234,7 @@ const Home: React.FC = () => {
                                         {logData
                                             .filter(log => log.serviceId === serviceId)
                                             .map(log => (
-                                                <li key={log._id} className="p-2 bg-gray-100 rounded-md shadow-sm">
+                                                <li key={log.id} className="p-2 bg-gray-100 rounded-md shadow-sm">
                                                     <p className="text-gray-700 font-medium">{log.logs}</p>
                                                     <p className="text-gray-500 text-sm">
                                                         Created at: {new Date(log.createdAt).toLocaleString()}
