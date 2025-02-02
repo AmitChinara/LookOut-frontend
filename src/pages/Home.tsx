@@ -6,6 +6,7 @@ const API_BASE_URL = "https://lookout-backend-6msy.onrender.com/api/v1/status";
 
 const Home: React.FC = () => {
     const [messages, setMessages] = useState<any[]>([]);
+    const [logData, setLogData] = useState<any[]>([]);  // New state for log data
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const { user } = useUser();
 
@@ -25,6 +26,7 @@ const Home: React.FC = () => {
             console.log("Received:", response);
             if (response?.event === "INITIAL_LOAD") {
                 setMessages(response.data.statusData ?? []);
+                setLogData(response.data.logData ?? []);  // Set log data
             } else if (response?.event === "STATUS_UPDATED") {
                 setMessages(prevMessages =>
                     prevMessages.map(message =>
@@ -126,7 +128,8 @@ const Home: React.FC = () => {
                         className="space-y-6"
                     >
                         <div className="space-y-2">
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Service Name: </label>
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Service
+                                Name: </label>
                             <input
                                 name="name"
                                 id="name"
@@ -137,7 +140,8 @@ const Home: React.FC = () => {
                             />
                         </div>
                         <div className="space-y-2">
-                            <label htmlFor="createdBy" className="block text-sm font-medium text-gray-700">Created By: </label>
+                            <label htmlFor="createdBy" className="block text-sm font-medium text-gray-700">Created
+                                By: </label>
                             <input
                                 name="createdBy"
                                 id="createdBy"
@@ -210,7 +214,22 @@ const Home: React.FC = () => {
                     </button>
                 </div>
             )}
+            <div className="bg-white shadow-md rounded-lg p-6">
+                <h3 className="text-xl font-semibold mb-4">Log Data</h3>
+                <ul className="space-y-2">
+                    {logData.length > 0 ? (
+                        logData.map((log, index) => (
+                            <li key={index} className="p-2 bg-gray-100 rounded-md text-sm">
+                                {log.message} - <span className="text-gray-500">{log.timestamp}</span>
+                            </li>
+                        ))
+                    ) : (
+                        <p className="text-gray-500">No logs available</p>
+                    )}
+                </ul>
+            </div>
         </div>
+
     );
 };
 
