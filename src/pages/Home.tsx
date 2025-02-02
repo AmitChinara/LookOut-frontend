@@ -222,7 +222,7 @@ const Home: React.FC = () => {
                     {uniqueServiceIds.length > 0 ? (
                         uniqueServiceIds.map(serviceId => (
                             <li key={serviceId} className="mb-4">
-                                <h4 className="text-lg font-semibold text-gray-700">Service ID: {serviceId}</h4>
+                                <h4 className="text-lg font-semibold text-gray-700">Service Name: {messages.find(msg => msg._id === serviceId)?.name || "Unknown Service"}</h4>
                                 <ul className="mt-2 space-y-2">
                                     {logData
                                         .filter(log => log.serviceId === serviceId)
