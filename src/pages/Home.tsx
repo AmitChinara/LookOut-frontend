@@ -9,7 +9,7 @@ const Home: React.FC = () => {
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const { user } = useUser();
 
-    let isAdmin = `${user?.organizationMemberships?.[0]?.role}` === "org:admin" || false;
+    const isAdmin = `${user?.organizationMemberships?.[0]?.role}` === "org:admin" || false;
 
     useEffect(() => {
         const ws = new WebSocket(WS_URL);
@@ -20,7 +20,8 @@ const Home: React.FC = () => {
         };
 
         ws.onmessage = (event: MessageEvent) => {
-            let response = JSON.parse(event.data);
+            const response = JSON.parse(event.data);
+
             console.log("Received:", response);
             if (response?.event === "INITIAL_LOAD") {
                 setMessages(response.data ?? []);
