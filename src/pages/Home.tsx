@@ -214,20 +214,20 @@ const Home: React.FC = () => {
                     </button>
                 </div>
             )}
-            {/*<div className="bg-white shadow-md rounded-lg p-6">*/}
-            {/*    <h3 className="text-xl font-semibold mb-4">Log Data</h3>*/}
-            {/*    <ul className="space-y-2">*/}
-            {/*        {logData.length > 0 ? (*/}
-            {/*            logData.map((log, index) => (*/}
-            {/*                <li key={index} className="p-2 bg-gray-100 rounded-md text-sm">*/}
-            {/*                    {log.message} - <span className="text-gray-500">{log.timestamp}</span>*/}
-            {/*                </li>*/}
-            {/*            ))*/}
-            {/*        ) : (*/}
-            {/*            <p className="text-gray-500">No logs available</p>*/}
-            {/*        )}*/}
-            {/*    </ul>*/}
-            {/*</div>*/}
+            <div className="bg-white shadow-md rounded-lg p-6">
+                <h3 className="text-xl font-semibold mb-4">Log Data</h3>
+                <ul className="space-y-2">
+                    {logData.length > 0 ? (
+                        logData.map((log, index) => (
+                            <li key={index} className="p-2 bg-gray-100 rounded-md text-sm">
+                                {log.message} - <span className="text-gray-500">{log.timestamp}</span>
+                            </li>
+                        ))
+                    ) : (
+                        <p className="text-gray-500">No logs available</p>
+                    )}
+                </ul>
+            </div>
         </div>
 
     );
