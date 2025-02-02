@@ -24,7 +24,7 @@ const Home: React.FC = () => {
 
             console.log("Received:", response);
             if (response?.event === "INITIAL_LOAD") {
-                setMessages(response.data ?? []);
+                setMessages(response.data.statusData ?? []);
             } else if (response?.event === "STATUS_UPDATED") {
                 setMessages(prevMessages =>
                     prevMessages.map(message =>
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
                     )
                 );
             } else if (response?.event === "SERVICE_CREATED") {
-                setMessages(prevMessages => [...prevMessages, response.data]);
+                setMessages(prevMessages => [...prevMessages, response.data.statusData]);
             } else if (response?.event === "SERVICE_DELETED") {
                 setMessages(prevMessages => prevMessages.filter(message => message._id !== response.id));
             }
