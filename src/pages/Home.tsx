@@ -35,6 +35,7 @@ const Home: React.FC = () => {
                 );
             } else if (response?.event === "SERVICE_CREATED") {
                 setMessages(prevMessages => [...prevMessages, response.data.statusData]);
+                setLogData(prevMessages => [...prevMessages, response.data.logData]);
             } else if (response?.event === "SERVICE_DELETED") {
                 setMessages(prevMessages => prevMessages.filter(message => message._id !== response.id));
             }
